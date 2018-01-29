@@ -5,7 +5,7 @@ The web version of the graphics is available at https://ksenia007.github.io/Star
 
 How does it work? 
 
-*Disclaimer: I am still working on most aspects of the code, especially the way the stars locations are saved. 
+*Disclaimer: I am still working on most aspects of the code, especially the way the stars locations are saved*
 
 There are three components: 
 
