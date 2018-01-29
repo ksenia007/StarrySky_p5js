@@ -18,66 +18,75 @@ function setup(){
     //load images
     img = loadImage("assets/lakeEveningSmall.jpg");  // Load an image into the program
     hw=loadImage('assets/hwLake.jpg');
+    //initialize the shooting star location
     shootingXstart.push(800);
     shootingYstart.push(200);
 }
 
 function draw(){ 
+    //place the background image
     image(img,0,0);
     noFill(); //no fill in shapes
 
+    //////////// Hello Word Stars
+    //get the number of stars we already have
     lengthStars=randomStarsX.length;
-
-
-    var xS=0; //define variables
+    //define variables
+    var xS=0; 
     var yS=0;
     var added=0; //counter for the number of stars added this iteration
+    // check if there are enough stars
     if (lengthStars<900){
-    while (added<5){
-        xS=round(Math.random()*(width)); //find random x
-        yS=round(Math.random()*(height-250)); //random y in range
+        // we want to add 5 every iteration
+        while (added<5){
+            xS=round(Math.random()*(width)); //find random x
+            yS=round(Math.random()*(height-250)); //random y in range
 
-        if (red(hw.get(xS,yS))==0){ //if it is in the text field
-            starsLocationsX.push(xS); //add elements
-            starsLocationsY.push(yS);
-            added+=1; //update counter
+            if (red(hw.get(xS,yS))==0){ //if it is in the text field
+                starsLocationsX.push(xS); //add elements
+                starsLocationsY.push(yS);
+                added+=1; //update counter
+            }
         }
-    }
     }
     strokeWeight(2); //set the stroke for the point
     stroke(255);
-
-    var lengthStars=starsLocationsX.length; //get number stars available
-    
-    //point(lengthStars,lengthStars); //temp, debugging to track the size
-
+    //get number stars available
+    var lengthStars=starsLocationsX.length; 
 
     //keep the points inside letters to a limited number
     if (lengthStars>900){
+        // remove the first 5 locations
         starsLocationsX=starsLocationsX.slice(5, lengthStars);
         starsLocationsY=starsLocationsY.slice(5, lengthStars);
-
     }
+
     //draw all stars inside letters
     for (var k=1; k<lengthStars; k++){
+        // select the random brightness
         stroke(255, 128+round(Math.random()*128));
-            point(starsLocationsX[k], starsLocationsY[k]);
+        //draw the point
+        point(starsLocationsX[k], starsLocationsY[k]);
     }
 
-    var lenSh=shootingXstart.length;
-    point(lenSh,lenSh);
 
+
+    //////////// Shooting star
+    ///
+    // get the length of the tail
+    var lenSh=shootingXstart.length;
     strokeWeight(4);
+    //draw the point
     point(shootingXstart[lenSh-1], shootingYstart[lenSh-1]);
+    //update position
     shootingXstart.push(shootingXstart[lenSh-1]-2);
     shootingYstart.push(shootingYstart[lenSh-1]+1);
-
+    // draw the star+tail
     for (f=0;f<lenSh; f++){
-        stroke(255, f);
+        stroke(255, f); // alpha dependent on the iteration count
         point(shootingXstart[f], shootingYstart[f]);
     }
-    ///dSq=Math.pow(shootingXstart[lenSh]-shootingXstart[0],2)+Math.pow(shootingYstart[lenSh]-shootingYstart[0],2);
-    //d=Math.sqrt(dSq);
+    //if the tail longer than 50 point - restart
     if (lenSh>50){
         shootingXstart=[];
         shootingYstart=[];
@@ -87,24 +96,9 @@ function draw(){
     }
 
 
-    // if (lenSh>50){
-    //     shootingXstart=shootingXstart.slice(1, lenSh);
-    //     shootingYstart=shootingYstart.slice(1, lenSh);
-    // }
-
-    // strokeWeight(10);
-    // if (shootingYstart<300){
-    //     for (i=0; i<10; i++){
-    //     stroke(255,100+i*10/2);
-    //     point(shootingXstart, shootingYstart);
-    //     shootingXstart-=1;
-    //     shootingYstart+=1;
-    //     }
-
-    // }
-    // shootingX+=1;
-
-    //add usual stars as some behind screen
+    //////////// Background stars
+    ///
+    /// add usual stars as some behind screen
     strokeWeight(3); //set the stroke for the point
     stroke(255,28);
     xS=0; //define variables
@@ -113,16 +107,16 @@ function draw(){
     while (added<4){
         xS=round(Math.random()*(width)); //find random x
         yS=round(Math.random()*(height-250)); //random y in range
-        //randomStarsX.shift(); //shift to keep the number of stars constant
         randomStarsX.push(xS); //add elements
-        //randomStarsY.shift();
         randomStarsY.push(yS);
         added+=1; //update counter
     }
-    if (lengthStars>10){
+    // check that there are less than X stars
+    if (lengthStars>20){
         randomStarsX=randomStarsX.slice(4, lengthStars);
         randomStarsY=randomStarsY.slice(4, lengthStars);
     }
+    //draw them
     for (var k=1; k<lengthStars; k++){
         point(randomStarsX[k], randomStarsY[k]);
 }
