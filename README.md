@@ -1,4 +1,4 @@
-# StarrySky_p5js
+# StarrySky
 A second sketch for the p5js Hello World series. Draws stars based on the image with text. 
 
 The web version of the graphics is available at https://ksenia007.github.io/StarrySky_p5js/
