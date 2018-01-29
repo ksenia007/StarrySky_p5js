@@ -3,6 +3,10 @@ A second sketch for the p5js Hello World series. Draws stars based on the image 
 
 The web version of the graphics is available at https://ksenia007.github.io/StarrySky_p5js/
 
+<p align="center">
+  <img src="/assets/rec.gif" width="500">
+</p>
+
 How does it work? 
 
 *Disclaimer: I am still working on most aspects of the code, especially the way the stars locations are saved*
@@ -16,6 +20,14 @@ There are three components:
 3. The shooting star. 
 
 For each of those three components, there are separate arrays that correspond to the X and Y location. 
+
+There are 2 images used - one is the visible background, and the other are the words. 
+
+<p align="center">
+  <img src="/assets/lakeEveningSmall.jpg" width="350">
+    <img src="/assets/hwLake.jpg" width="350">
+
+</p>
 
 For the stars that form the letters, I draw the location on random from the narrow strip where I know the letter are contained. For every random point I sample the image contatining the words. If i detect black, then the point is on top of the letter, and I add the colation to the array. This is repeated 5 times every iteration of the draw function until there are more than 900 stars. I then draw all of them with varying intensity. 
 
